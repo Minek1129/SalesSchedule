@@ -578,6 +578,8 @@ function loadCompanyList() {
     
     // Render table
     document.getElementById("companyTableBody").innerHTML = companies.map((company, index) => `
+    renderCompanyTable(companies.map((company, index) => ({ ...company, originalIndex: index })));
+
         <tr>
             <td>${company.city || ''}</td>
             <td>${company.name || ''}</td>
@@ -691,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load initial data if needed
     if (!localStorage.getItem("companies")) {
-        fetch('Companies.json')
+        fetch('companies.json')
             .then(response => response.json())
             .then(data => {
                 const normalized = data.map(entry => ({
@@ -796,12 +798,13 @@ function populateEmployeeDropdown() {
     }
 }
 
-// Company data functions
 function loadCompanyList() {
     const companies = JSON.parse(localStorage.getItem("companies") || "[]");
-    renderCompanyTable(companies);
-    populateCityFilter();
-}
+    // Add originalIndex for edit functionality
+    const enrichedCompanies = companies.map((c, i) => ({ ...c, originalIndex: i }));
+    renderCompanyTable(enrichedCompanies);
+    populateCityDropdown(companies);
+  }
 
 function populateCityFilter() {
     const companies = JSON.parse(localStorage.getItem("companies") || "[]");
@@ -920,7 +923,7 @@ function deleteCompany(index) {
 
 // Helper function to load default data
 function fetchDefaultCompanies() {
-    fetch('Companies.json')
+    fetch('companies.json')
         .then(response => response.json())
         .then(data => {
             const normalized = data.map(entry => ({

@@ -1226,3 +1226,20 @@ h1 {
 .modal-content {
     scroll-behavior: smooth;
 }
+
+button.logout-btn {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    background-color: #e74c3c; /* bright red */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.logout-btn:hover {
+    background-color: #c0392b; /* darker red on hover */
+  }
+  

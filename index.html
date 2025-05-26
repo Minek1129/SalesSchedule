@@ -11,6 +11,12 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
   </style>
+  <script>
+    if (localStorage.getItem("authenticated") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+  
 </head>
 <body>
   <div class="container">
@@ -32,6 +38,15 @@
           <input type="date" id="date" />
           <button onclick="addSchedule()">Add Schedule</button>
           <button onclick="openReportModal()">Generate Weekly Report</button>
+          <button class="logout-btn" onclick="logout()">Log out</button>
+          </button>
+          
+          <script>
+            function logout() {
+              localStorage.removeItem("authenticated");
+              window.location.href = "login.html";
+            }
+          </script>
         </div>
 
         <div class="tabs-grid">
@@ -189,6 +204,11 @@
 
   
 
+<script>
+  if (localStorage.getItem("authenticated") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
 
   <script src="script.js"></script>
 </body>

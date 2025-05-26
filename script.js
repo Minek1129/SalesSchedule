@@ -691,7 +691,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load initial data if needed
     if (!localStorage.getItem("companies")) {
-        fetch('https://raw.githubusercontent.com/Minek1129/SalesSchedule/refs/heads/main/Companies.json')
+        fetch('Companies.json')
             .then(response => response.json())
             .then(data => {
                 const normalized = data.map(entry => ({
@@ -920,7 +920,7 @@ function deleteCompany(index) {
 
 // Helper function to load default data
 function fetchDefaultCompanies() {
-    fetch('https://raw.githubusercontent.com/Minek1129/SalesSchedule/refs/heads/main/Companies.json')
+    fetch('Companies.json')
         .then(response => response.json())
         .then(data => {
             const normalized = data.map(entry => ({

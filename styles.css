@@ -1,0 +1,1228 @@
+body { 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fb;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.form-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.calendar-section {
+    flex: 3;
+    min-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.form select,
+.form input[type="text"],
+.form input[type="date"],
+.form button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.form button {
+    padding: 10px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    flex: 1 1 150px; /* Even sizing */
+    transition: background 0.2s;
+}
+
+.form button:hover {
+    background-color: #0056b3;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0 20px; /* Top & bottom spacing */
+}
+
+.tabs button {
+    padding: 10px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    flex: 0 1 150px; /* Even sizing */
+    transition: background 0.2s;
+}
+
+.tabs button:hover {
+    background: #0056b3;
+}
+
+.tab {
+    display: none;
+    margin-top: 20px;
+}
+
+.tab.active {
+    display: block;
+}
+
+#calendar-tab, #per-employee-tab {
+    padding: 10px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+  
+.calendar-header button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 25px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background: #0056b3;
+}
+
+.calendar > div {
+    background: #fdfdfd;
+    border: 1px solid #ccc;
+    padding: 4px;
+    min-height: 100px;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 6px;
+}
+
+.calendar > div > div:first-child {
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+}
+  
+#month-year {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+  
+/* Weekday row */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+/* Calendar grid */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+  
+.calendar > div {
+    position: relative;
+    padding: 4px;
+    min-height: 90px;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.schedule-entry {
+    background: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 12px;
+    position: relative;
+}
+
+.schedule-entry:hover .appointment-actions {
+    display: flex;
+}
+
+.appointment-actions {
+    display: none;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    gap: 3px;
+}
+
+.appointment-actions button {
+    background: #eee;
+    border: none;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.employee-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 1px;
+    margin-bottom: 15px;
+}
+#employee-filter {
+    padding: 5px 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#employee-schedule-display {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+.date-number {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+}
+
+.date-box {
+    width: 24px;
+    height: 24px;
+    background-color: #f0f0f0;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* not absolute anymore */
+    margin-bottom: 4px;
+}
+
+  
+.schedule-entry {
+    position: relative;
+    font-size: 12px;
+    background: #e7f3ff;
+    padding: 4px 6px;
+    border-radius: 4px;
+    margin: 2px 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+
+.schedule-entry:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* transparent white */
+}
+
+
+/* Employee Schedule Display Styles */
+.employee-selector {
+    margin-bottom: 20px;
+}
+
+.employee-schedule-container {
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.schedule-date-group {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.schedule-date-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.schedule-date-group h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.employee-appointment {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    border-left: 3px solid #007bff;
+}
+
+.employee-appointment:last-child {
+    margin-bottom: 0;
+}
+
+.company {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.client-type {
+    color: #666;
+    font-size: 13px;
+    display: block;
+}
+
+/* Calendar Entry Buttons (hover-only) */
+.schedule-entry {
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 6px 8px;
+    position: relative;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.schedule-entry .appointment-actions {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    gap: 3px;
+}
+
+.schedule-entry:hover .appointment-actions {
+    display: flex;
+}
+
+.schedule-entry .edit-btn, 
+.schedule-entry .delete-btn {
+    padding: 1px 4px;
+    font-size: 10px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.schedule-entry .edit-btn {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.schedule-entry .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Per Employee Edit Styles */
+.employee-schedule-item.editing {
+    background-color: #f8f9fa;
+    border-left: 3px solid #007bff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-form-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.edit-form-row select, 
+.edit-form-row input {
+    padding: 6px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-grow: 1;
+}
+
+.edit-form-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.edit-form-buttons button {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+/* Edit Modal Styles */
+.edit-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+/* Calendar hover buttons */
+.schedule-entry {
+    position: relative;
+    padding-right: 20px;
+}
+
+/* Refined hover buttons inside calendar cells */
+.schedule-entry {
+    position: relative;
+    padding-bottom: 18px; /* Add space for buttons */
+}
+
+.schedule-entry .appointment-actions {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
+    gap: 5px;
+    padding-top: 4px;
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: subtle background for visibility */
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.schedule-entry:hover .appointment-actions {
+    display: flex;
+}
+
+.schedule-entry .edit-btn,
+.schedule-entry .delete-btn {
+    padding: 10px 10px;
+    font-size: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.schedule-entry .edit-btn {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.schedule-entry .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Updated modal design to match layout and button styling */
+.edit-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form input,
+.edit-form select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.modal-buttons button {
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.modal-buttons .save-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-buttons .save-btn:hover {
+    background-color: #0056b3;
+}
+
+.modal-buttons .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.modal-buttons .cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 4px 6px;
+    color: #333;
+    transition: color 0.2s;
+    width: 50px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+/* Month selector layout */
+.month-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1rem 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.month-selector label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+#month-filter {
+    padding: 5px 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Per employee container */
+.employee-schedule-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.schedule-date-group {
+    background: #f9f9f9;
+    border-left: 4px solid #007bff;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.schedule-date-group h4 {
+    margin: 0 0 0.5rem;
+    color: #007bff;
+    font-size: 1rem;
+}
+
+/* Appointment entries */
+.employee-appointment {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.employee-appointment .company {
+    font-weight: 500;
+}
+
+.employee-appointment .client-type {
+    color: #666;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .employee-appointment {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .month-selector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Employee Info Modal Styles */
+#employee-info-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+#employee-info-modal .modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 25px;
+    animation: fadeIn 0.3s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#employee-info-modal h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eaeaea;
+    margin-bottom: 20px;
+}
+
+#employee-info-container {
+    margin-bottom: 20px;
+}
+
+.employee-info-block {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    transition: border-color 0.2s;
+}
+
+.employee-info-block:hover {
+    border-color: #007bff;
+}
+
+.employee-info-block label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.employee-info-block input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.15s;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.employee-info-block input:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+#employee-info-modal button {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-top: 10px;
+}
+
+#employee-info-modal button:hover {
+    background-color: #0069d9;
+}
+
+/* Remove Employee Button */
+.remove-employee-btn {
+    background-color: #dc3545 !important;
+    margin-left: 10px;
+}
+
+.remove-employee-btn:hover {
+    background-color: #c82333 !important;
+}
+
+/* Button Container */
+.employee-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Ensure these selectors are specific enough */
+.modal-content .employee-actions,
+.modal-content .modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Make sure buttons don't appear multiple times */
+.modal-content .employee-actions button,
+.modal-content .modal-footer button {
+    margin: 0; /* Remove any default margins */
+}
+
+/* Add to your existing styles.css */
+.nav-btn {
+    padding: 10px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 0 5px;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the companies page container */
+.companies-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.companies-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Improved Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    overflow-y: auto;
+    /* Center the modal content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add some padding for smaller screens */
+    box-sizing: border-box;
+}
+  
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    width: 80%; /* Default width */
+    max-width: 1000px; /* Maximum width */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    margin: auto; /* Additional centering */
+    /* Add animation for smoother appearance */
+    animation: modalopen 0.3s ease-out;
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+  
+.modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+  
+.modal-title {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin: 0;
+}
+  
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6c757d;
+    background: none;
+    border: none;
+    padding: 0;
+}
+  
+.close:hover {
+    color: #333;
+}
+
+/* Company Modal Styles */
+.company-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#companyTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+#companyTable th {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+#companyTable td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#companyTable tr:hover {
+    background-color: #f5f7fa;
+}
+
+/* Button Styles */
+.company-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: none;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #007bff;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.add-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+/* Form Styles */
+#companyFormContainer {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.15s;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Form Actions - Improved Button Alignment */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 100px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .company-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-filter {
+        flex-direction: column;
+    }
+}
+
+/* Tab Grid Layout */
+.tabs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .tab-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 80px;
+  }
+  
+  .tab-button:hover {
+    background: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .tab-button span:first-child {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .tab-button span:last-child {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  /* Active tab state */
+  .tab-button.active {
+    background: #007bff;
+    color: white;
+    border-color: #0069d9;
+  }
+  
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* Close Button Styles - Top Right with Hover Effect */
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.close-modal-btn:active {
+    transform: scale(0.95);
+}
+
+/* Rest of your existing styles... */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.modal-content {
+    overflow-y: auto;
+    max-height: 90vh;
+    /* Existing styles... */
+}
+
+/* Smooth scroll behavior */
+.modal-content {
+    scroll-behavior: smooth;
+}

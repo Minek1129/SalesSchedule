@@ -1,0 +1,195 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Scheduling</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sales Scheduling</h1>
+
+    <div class="layout">
+      <!-- Form Section -->
+      <div class="form-section">
+        <div class="form">
+          <select id="employee">
+            <option value="" disabled selected>Select Employee</option>
+          </select>
+
+          <select id="client-type">
+            <option value="" disabled selected>Select Client Type</option>
+          </select>
+
+          <input type="text" id="company" placeholder="Enter Company Name" />
+          <input type="date" id="date" />
+          <button onclick="addSchedule()">Add Schedule</button>
+          <button onclick="openReportModal()">Generate Weekly Report</button>
+        </div>
+
+        <div class="tabs-grid">
+          <div class="tab-button" onclick="showTab('calendar')">
+            <span>Calendar</span>
+          </div>
+          <div class="tab-button" onclick="showTab('per-employee')">
+            <span>Per Employee</span>
+          </div>
+          <div class="tab-button" onclick="showEmployeeInfoModal()">
+            <span>Employee Info</span>
+          </div>
+          <div class="tab-button" onclick="openCompanyModal()">
+            <span>Company Info</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display Section -->
+      <div class="calendar-section">
+        <!-- Calendar View -->
+        <div id="calendar-tab" class="tab active">
+          <div class="calendar-header">
+            <button onclick="prevMonth()">←</button>
+            <h2 id="month-year">April 2025</h2>
+            <button onclick="nextMonth()">→</button>
+          </div>
+          <div id="calendar" class="calendar"></div>
+        </div>
+
+        <!-- Per Employee View -->
+        <div id="per-employee-tab" class="tab">
+          <div class="employee-selector">
+            <select id="employee-filter" onchange="filterEmployeeSchedule()">
+              <option value="" disabled selected>Select Employee to View Schedule</option>
+            </select>
+
+            <div class="month-selector">
+              <label for="month-filter">Select Month:</label>
+              <input type="month" id="month-filter" onchange="filterEmployeeSchedule()" />
+            </div>
+          </div>
+          <div id="employee-schedule-display"></div>
+        </div>
+
+        <div id="employee-info-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-modal-btn" onclick="closeEmployeeInfoModal()">&times;</span>
+            <h2>Employee Information</h2>
+            <div id="employee-info-container"></div>
+            <div class="employee-actions">
+              <button class="btn btn-secondary" onclick="addNewEmployeeField()">Add Employee</button>
+              <button class="btn btn-primary" onclick="saveAllEmployeeInfo()">Save All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Info Modal -->
+  <div id="companyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCompanyModal()">&times;</span>
+      <h2>Company Information</h2>
+      
+      <div class="company-controls">
+        <div class="search-filter">
+          <input type="text" id="companySearch" placeholder="Search companies..." class="form-control" oninput="filterCompanies()">
+          <select id="cityFilter" class="form-control" onchange="filterCompanies()">
+            <option value="">All Cities</option>
+          </select>
+          <button class="btn add-btn" onclick="showAddCompanyForm()">Add Company</button>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <table id="companyTable">
+          <thead>
+            <tr>
+              <th>City</th>
+              <th>Company</th>
+              <th>Address</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Employee</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="companyTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Add/Edit Company Form -->
+      <div id="companyFormContainer" style="display:none;">
+        <h3 id="formTitle">Add New Company</h3>
+        <form id="companyForm" onsubmit="saveCompany(event)">
+          <input type="hidden" id="editingCompanyIndex" value="">
+          
+          <div class="form-group">
+            <label for="companyCity">City</label>
+            <input type="text" id="companyCity" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input type="text" id="companyName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="companyAddress">Address</label>
+            <input type="text" id="companyAddress" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="companyContact">Contact Number</label>
+            <input type="text" id="companyContact" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="companyEmail">Email</label>
+            <input type="email" id="companyEmail" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="assignedEmployee">Assigned Employee</label>
+            <select id="assignedEmployee" class="form-control" required></select>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="cancelCompanyForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Company</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weekly Report Modal -->
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal-btn" onclick="closeReportModal()">&times;</span>
+        <h2>Generate Weekly Report</h2>
+        <div class="form-group">
+            <label for="reportEmployeeSelect">Employee:</label>
+            <select id="reportEmployeeSelect" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="reportStartDate">Start of Week (Monday):</label>
+            <input type="date" id="reportStartDate" class="form-control">
+        </div>
+        <div id="reportContent" class="report-content"></div>
+        <div class="modal-actions">
+            <button class="btn btn-primary" onclick="generateWeeklyReport()">Generate Report</button>
+            <button class="btn btn-secondary" onclick="downloadReportAsDoc()">Download as DOCX</button>
+        </div>
+    </div>
+</div>
+</div>
+
+  
+
+
+  <script src="script.js"></script>
+</body>
+</html>
